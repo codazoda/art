@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Settings
+SIZE=600
+
+
+# Resize to 600 pixels on the widest side while keeping the aspect ratio
+convert -resize ${SIZE}x${SIZE} "$1" -background white -gravity center square.jpg
+
+# Add a drop shadow (this isn't perfectly centered like I want)
+convert square.jpg -bordercolor white -border 10 \( +clone -background black -shadow 80x10+5+5 \) +swap -background white -layers merge +repage square.jpg
+
+# Splice some space left and top to center the image
+convert square.jpg -gravity northwest -background white -splice 10x10 square.jpg
+
+# Add a white border (mat) all around
+convert square.jpg -bordercolor white -border 50 square.jpg
+
+# Make it square
+convert -define jpeg:size=600x600 square.jpg -thumbnail "600x600>" -background white -gravity center -extent "600x600" square.jpg
+
+# Add a white border to the bottom
+#convert bordered.jpg -bordercolor white -border x600 walled.jpg
