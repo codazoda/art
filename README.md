@@ -2,5 +2,5 @@
 
 A collection of tools that I've built to work on my art.
 
-- [Thing One](thingone)
+- [Square](square)
 - [Thing Two](thingtwo)
